@@ -94,4 +94,5 @@ def brute_force(f):
             return i
             break
 
+
 s = ['this is my package']
