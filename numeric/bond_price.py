@@ -1,8 +1,10 @@
+
+import numpy as np
 '''
 bond price method 
 '''
 
-def w(y,t,c,fv,fre,tp):
+def bond_price(y,t,c,fv,fre,tp='f'):
     '''
     t : time 
     fre : frequency
@@ -15,19 +17,16 @@ def w(y,t,c,fv,fre,tp):
         else type = fx :
             derative function
     '''
-    try :
-        if tp == 'f' :
-            t = t * fre 
-            time = np.arange(1,t+1)
-            x = (c/fre * fv) / (1 + y/fre) ** time
-            return np.sum(x) + fv/(1+y/fre)**time[-1]
-        elif tp == 'fx' : 
-            t = t * fre 
-            time = np.arange(1,t+1)
-            x = (-c * fv * time/(fre ** 2) ) / (1 + y/fre) ** (time + 1) 
-            return np.sum(x) - fv/(1+y/fre)**(time[-1]+1)
-    except : 
-        print('method wrong') 
+    if tp == 'f' :
+        t = t * fre 
+        time = np.arange(1,t+1)
+        x = (c/fre * fv) / (1 + y/fre) ** time
+        return np.sum(x) + fv/((1+y/fre)**t)
+    elif tp == 'fx' : 
+        t = t * fre 
+        time = np.arange(1,t+1)
+        x = (-c * fv * time/(fre ** 2) ) / (1 + y/fre) ** (time + 1) 
+        return np.sum(x) - fv/(1+y/fre)**(t+1)
         
 def solve_bond_price_yield(t=6.0,c=0.08,fv=1000,fre=1,bp=955.14,tp='f'):
     '''
@@ -53,4 +52,4 @@ def solve_bond_price_yield(t=6.0,c=0.08,fv=1000,fre=1,bp=955.14,tp='f'):
     print('secant : ' + str(nm.secant(-0.01,0.01,1e-16,500,f)))
     '''
     
-    return lambda y : (w(y,t,c,fv,fre,tp) - bp)
+    return lambda y : (bond_price(y,t,c,fv,fre,tp) - bp)

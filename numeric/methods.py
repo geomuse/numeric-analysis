@@ -26,7 +26,7 @@ def newton( xo ,tol , no , f , fx ):
         xo = x
 #         print(xo)
 #     if i == no:
-    print('maximum number of iterations N0...')
+    return float('nan')
 
 '''
 secant method
@@ -47,7 +47,7 @@ def secant(po , p1 , tol , no , f ):
             break 
         i+=1
         po , qo , p1 , q1 = p1 , q1 , p , f(p)
-    print('The method failed after N0 iterations, N0 =', no)   
+    return float('nan')   
 
 '''
 bisection method
@@ -75,7 +75,7 @@ def bisection( start , end , tol , no , f):
         elif fa * fp < 0 : 
             et = p
 #     if i == no:
-    print('maximum number of iterations N0')
+    return float('nan')
 
 '''
 brute-force method
