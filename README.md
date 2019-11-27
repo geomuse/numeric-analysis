@@ -1,2 +1,2 @@
 # numeric-analysis
-使用secant , newton , bisection 求根 以及 估計 yield rate (bond price)
+using secant , newton , bisection find the root and estimate yield rate (bond price) in financial
