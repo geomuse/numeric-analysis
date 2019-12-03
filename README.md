@@ -4,3 +4,7 @@
 
 - gauss elimination
 
+- iterative methods 
+  - Jacobi
+  - Gauss-Seidel
+  - SOR
