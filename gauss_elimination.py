@@ -42,9 +42,9 @@ import scipy.linalg as sl
 
 def matrix(row,col,rge=range(-5,-1)):
     '''
-    row : 輸入你要矩陣的 row 數量
-    col : 同上 但是主要是 column 數量 
-    range
+    row : input the row number you want
+    col : input the col number you want 
+    rge : range for r.choices 
     '''
     mat = r.choices(rge, k=row*col) # range , length
     x = r.choices(rge,k=row)
