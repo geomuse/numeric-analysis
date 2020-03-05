@@ -171,3 +171,5 @@ Using Intermediate Value Theorem Fix this Problem , How ?
 ### bisection
 
 <img src='pictures/bisection.PNG'>
+
+參考書籍 : Numerical Analysis , Richard L. Burden and J. Douglas Faires
