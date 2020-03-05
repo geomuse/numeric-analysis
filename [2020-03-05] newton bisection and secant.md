@@ -166,8 +166,8 @@ Using Intermediate Value Theorem Fix this Problem , How ?
 
 ### secant
 
-<img src='pictures/secant.png'>
+<img src='pictures/secant.PNG'>
 
 ### bisection
 
-<img src='pictures/bisection.png'>
+<img src='pictures/bisection.PNG'>
