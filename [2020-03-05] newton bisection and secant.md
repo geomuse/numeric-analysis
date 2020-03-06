@@ -80,7 +80,7 @@ class method:
     '''
     bisection method 二分法
     '''
-    def bisection(self , start , end , tol , no , f):
+    def bisection(self , start , end , tol , no):
         '''
         start : start points 
         end : end points 
