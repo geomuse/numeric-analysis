@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      [2020-03-05] newton bisection and secant
+title:      [2020-03-06] newton bisection and secant
 subtitle:   開發者需要依這個手冊作爲編程基本方向
 date:       2020-03-05
 author:     GEo
@@ -19,11 +19,11 @@ pandoc -o output.docx -f markdown -t docx input.md
 
 ```
 '''
-newton 牛頓法
+newton method
 '''
-def newton(self,xo,tol,no):
+def newton( xo ,tol , no , f , fx ):
     '''
-    xo : initial approximation  , zero can't be use
+    xo : initial approximation  
     TOL : tolerance  
     no : maximum number of iterations
     f : function
@@ -32,43 +32,46 @@ def newton(self,xo,tol,no):
     i = 0
     while i <= no :
         try:
-            f1 = self.f(xo)
-            f2 = self.fx(xo)
+            f1 = f(xo)
+            f2 = fx(xo)
             x = xo - (  f1 / f2 ) 
         except ZeroDivisionError:
+#             print('ZeroDivisionError')
             continue
         if np.abs(x-xo) < tol :
             return x
             break 
         i+=1
         xo = x
+#         print(xo)
+#     if i == no:
     return float('nan')
 
 '''
-secant 割綫法
+secant method
 '''
-def secant(self , po , p1 , tol , no):
+def secant(po , p1 , tol , no , f ):
     '''
     po , p1 : initial approximations
     TOL : tolerance
     no : maximum number of iterations
     '''
-    i = 0
-    qo = self.f(po)
-    q1 = self.f(p1)
+    i = 2 
+    qo = f(po)
+    q1 = f(p1)
     while i <= no : 
         p = p1 - q1*(p1-po) / (q1 - qo)
         if np.abs(p - p1) < tol :
             return p
             break 
         i+=1
-        po , qo , p1 , q1 = p1 , q1 , p , self.f(p)
-    return float('nan')
+        po , qo , p1 , q1 = p1 , q1 , p , f(p)
+    return float('nan')   
 
 '''
-bisection method 二分法
+bisection method
 '''
-def bisection(self , start , end , tol , no , f):
+def bisection( start , end , tol , no , f):
     '''
     start : start points 
     end : end points 
@@ -78,19 +81,37 @@ def bisection(self , start , end , tol , no , f):
     i = 1 
     st = start
     et = end
-    fa = self.f(st)
+    fa = f(st)
     while i <= no:
         p = st + (et-st)/2
-        fp = self.f(p)
+        fp = f(p)
         if fp == 0 or (et-st)/2 < tol :
             return p
             break
         i+=1
         if fa * fp > 0 :
-            st , fa  = p , fp
+             st , fa  = p , fp
         elif fa * fp < 0 : 
             et = p
+#     if i == no:
     return float('nan')
+
+'''
+brute-force method
+'''
+def brute_force(f):
+    '''
+    rn : round number
+    f : func
+    '''
+    rn = 2
+    i = 0
+    while True:
+        i+= 0.001
+        p = np.round(f(i), rn)
+        if p == 0 :
+            return i
+            break
 ```
 
 
