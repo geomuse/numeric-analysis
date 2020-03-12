@@ -273,7 +273,7 @@ Using Intermediate Value Theorem Fix this Problem , How ?
 
 ### newton 
 
-<img src='pictures/newton.png'>
+<img src='pictures/newton.PNG'>
 
 ### secant
 
