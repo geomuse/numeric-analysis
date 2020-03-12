@@ -15,8 +15,86 @@ tags:
 ```
 pandoc -o output.docx -f markdown -t docx input.md
 ```
-
 ## 整個 method 架構的程式碼
+
+```
+'''
+newton 牛頓法
+'''
+def newton(self,xo,tol,no):
+    '''
+    xo : initial approximation  , zero can't be use
+    TOL : tolerance  
+    no : maximum number of iterations
+    f : function
+    fx : derative function
+    '''
+    i = 0
+    while i <= no :
+        try:
+            f1 = self.f(xo)
+            f2 = self.fx(xo)
+            x = xo - (  f1 / f2 ) 
+        except ZeroDivisionError:
+            continue
+        if np.abs(x-xo) < tol :
+            return x
+            break 
+        i+=1
+        xo = x
+    return float('nan')
+
+'''
+secant 割綫法
+'''
+def secant(self , po , p1 , tol , no):
+    '''
+    po , p1 : initial approximations
+    TOL : tolerance
+    no : maximum number of iterations
+    '''
+    i = 0
+    qo = self.f(po)
+    q1 = self.f(p1)
+    while i <= no : 
+        p = p1 - q1*(p1-po) / (q1 - qo)
+        if np.abs(p - p1) < tol :
+            return p
+            break 
+        i+=1
+        po , qo , p1 , q1 = p1 , q1 , p , self.f(p)
+    return float('nan')
+
+'''
+bisection method 二分法
+'''
+def bisection(self , start , end , tol , no , f):
+    '''
+    start : start points 
+    end : end points 
+    tol : tolerance 
+    no : maximum number of iterations 
+    '''
+    i = 1 
+    st = start
+    et = end
+    fa = self.f(st)
+    while i <= no:
+        p = st + (et-st)/2
+        fp = self.f(p)
+        if fp == 0 or (et-st)/2 < tol :
+            return p
+            break
+        i+=1
+        if fa * fp > 0 :
+            st , fa  = p , fp
+        elif fa * fp < 0 : 
+            et = p
+    return float('nan')
+```
+
+
+## 整個 method 架構的程式碼 利用 Class 
 
 過後再細步考慮每個方法的程式邏輯 。
 
@@ -80,7 +158,7 @@ class method:
     '''
     bisection method 二分法
     '''
-    def bisection(self , start , end , tol , no):
+    def bisection(self , start , end , tol , no , f):
         '''
         start : start points 
         end : end points 
@@ -104,8 +182,19 @@ class method:
                 et = p
         return float('nan')
 ```
+## 怎麽使用 ，當使用 自定函數的情況下 
 
-## 怎麽使用 
+```
+help(bisection)
+```
+
+```
+f , fx = lambda x : x**2 -2 , lambda x : 2*x 
+
+newton(1,1e-15,500,f,fx) , secant(0,1,1e-15,500,f) , bisection(0.1,0.2,1e-15,500,f)
+```
+
+## 怎麽使用 , 當使用 class 的情況下
 
 當你不知道要放什麽時 , 可以輸入 ``` help(df.bisection)```
 
@@ -125,8 +214,9 @@ bisection(start, end, tol, no) method of __main__.method instance
 使用類別的方法
 
 ```
->> df = method(f,fx)
->> df.newton(1,1e-15,500) , df.secant(0,1,1e-15,500) , df.bisection(0.1,0.2,1e-15,500)
+f , fx = lambda x : x**2 -2 , lambda x : 2*x
+df = method(f,fx)
+df.newton(1,1e-15,500) , df.secant(0,1,1e-15,500) , df.bisection(0.1,0.2,1e-15,500)
 
 (1.414213562373095, 1.4142135623730951, 0.1999999999999993)
 ```
@@ -162,7 +252,7 @@ Using Intermediate Value Theorem Fix this Problem , How ?
 
 ### newton 
 
-<img src='./pictures/newton.PNG'>
+<img src='pictures/newton.png'>
 
 ### secant
 
@@ -170,6 +260,10 @@ Using Intermediate Value Theorem Fix this Problem , How ?
 
 ### bisection
 
-<img src='pictures/bisection.PNG'>
+<img src='./pictures/bisection.PNG'>
 
-參考書籍 : Numerical Analysis , Richard L. Burden and J. Douglas Faires
+## Review
+
+[1] Numerical Analysis , Richard L. Burden and J. Douglas Faires
+
+[2] Numerical Analysis (second edition) , Timothy Sauer , George Mason University
