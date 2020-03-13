@@ -105,7 +105,7 @@ Matrix transposition :
 
 下圖是scipy 子套件的領域 
 
-<img src='pictures/course-scipy.png'>
+<img src='pictures/course-scipy.PNG'>
 
 ## How to Start Scipy in Jupyter (Ipython notebook)
 
