@@ -1,7 +1,19 @@
-## numeric-analysis
+# numeric-analysis.
 
-會把關於數值分析資料丟到這邊 。
+曾经作为数值分析助教存放的内容.
 
+在处理最佳化理论需要用到数值分析的方法论.
 
-TEams 鏈接 ~ 
-https://teams.microsoft.com/l/channel/19%3a6cc4adf3b8614180b76b67fa7acaa99c%40thread.tacv2/%25E4%25B8%2580%25E8%2588%25AC?groupId=ef1cfdd7-a9b6-47c7-86ab-55dc30b91642&tenantId=bad7ebcf-ed55-45c0-8f9a-73acb44e26d9
+经过4年回来重复把数值分析重新搞扎实.
+
+并把之前的教材翻新提交更多内容.
+
+# 参考书籍.
+
+[1] Numerical Analysis ninth-edition , Richard L.Burden J.Douglas Faires.
+
+[2] Numerical Analysis second-edition , Timothy Sauer.
+
+**永远怀念老师的帮忙.**
+
+會把關於數值分析資料丟到這邊 。- May 15, 2020 留.
