@@ -1,6 +1,6 @@
 import numpy as np
 from loguru import logger
-from generate_example import bond_price_example
+from generate_example import bond_price_example , bond_price_example_for_sympy
 import os 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 log = os.path.join(current_dir,'log/error.log')
@@ -76,14 +76,22 @@ class solv_equations:
             ...
 
 if __name__ == '__main__':
-    bp , nm = bond_price_example() , solv_equations()
-    f = bp.solve_bond_price_yield()
-    fx = bp.solve_bond_price_yield(tp='fx')
-    
-    print(f'newton : {nm.newton(0.01,1e-18,500,f,fx)}.')
+    bp , bpe ,  nm = bond_price_example_for_sympy() , bond_price_example() , solv_equations()
+    t , c , fv , fre = 0.25 , 0 , 100 , 0.25
+    f = bp.solve_bond_price_yield(t,c,fv,fre,bp=99.6)
+
+    # print(f'newton : {nm.newton(0.01,1e-18,500,f,fx)}.')
     print(f'secant : {nm.secant(-0.01,0.01,1e-16,500,f)}.')
     print(f'secant variants : {nm.secant_variants(-0.01,0.01,1e-16,500,f)}.')
     print(f'bisection : {nm.bisection(-0.8,0.1,1e-16,500,f)}.')
     print(f'brute_force : {nm.brute_force(2,500,f)}.')
     
+    b = bp.bond_price(nm.secant(-0.01,0.01,1e-16,500,f),t,c,fv,fre,1)
+    print(b)
+
+    b = bp.bond_price(1.6064/100,t,c,fv,fre,1)
+    print(b)
    
+    x = bpe.bond_price(0.01,0.25,0.05,100,0.25,'fx')
+    y = bp.bond_price_differential(0.01,0.25,0.05,100,0.25)
+    print(x,y)
